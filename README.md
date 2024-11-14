@@ -1,7 +1,7 @@
 # Hex-to-Image Tool
 
 ## Overview
-Try it now: [Link](https://rawcdn.githack.com/Caskexe/HEX-to-Image/37c1ecfaceecd2d3d92441e2848c27d631d37f4e/HEX-to-Image.html)
+# [USE ONLINE VERSION](https://rawcdn.githack.com/Caskexe/HEX-to-Image/37c1ecfaceecd2d3d92441e2848c27d631d37f4e/HEX-to-Image.html)
 
 This is a simple HTML-based tool (with Javascript) that allows you to input a colour hex code and export it as a PNG image. You can also set the dimensions of the image and choose a prefix name for the exported file (for example "Black" will output the file "Black_000000.png"
 
