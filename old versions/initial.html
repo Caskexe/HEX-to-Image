@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hex Colour to Image Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #colorBox {
+            width: 100px;
+            height: 50px;
+            margin: 20px auto;
+            border: 1px solid #000;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 10px;
+            margin: 10px;
+            width: 150px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hex Colour to Image</h1>
+    HEX Colour<input type="text" id="hexInput" placeholder="#000000">
+    <br>
+    File name prefix (optional) <input type="text" id="prefixInput" placeholder="Prefix">
+    <br>
+    Width (px) <input type="number" id="widthInput" placeholder="Width (px)" value="100">
+    Height (px) <input type="number" id="heightInput" placeholder="Height (px)" value="50">
+    <br>
+    <button onclick="generateImage()">Generate Image</button>
+    <div id="colorBox"></div>
+    <a id="downloadLink" style="display: none;">Download Image</a>
+
+    <script>
+        function generateImage() {
+            let hexCode = document.getElementById('hexInput').value.trim();
+            
+            // Add # if not present
+            if (!hexCode.startsWith('#')) {
+                hexCode = '#' + hexCode;
+            }
+
+            const prefix = document.getElementById('prefixInput').value.trim();
+            const width = parseInt(document.getElementById('widthInput').value) || 100;
+            const height = parseInt(document.getElementById('heightInput').value) || 50;
+
+            const colorBox = document.getElementById('colorBox');
+            colorBox.style.backgroundColor = hexCode;
+            colorBox.style.width = width + 'px';
+            colorBox.style.height = height + 'px';
+
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = hexCode;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const image = canvas.toDataURL('image/png');
+            const downloadLink = document.getElementById('downloadLink');
+            
+            // Remove the # from hexCode and create the file name with optional prefix
+            const fileName = (prefix ? prefix + '_' : '') + hexCode.replace('#', '') + '.png';
+
+            downloadLink.href = image;
+            downloadLink.download = fileName;
+            downloadLink.style.display = 'inline';
+            downloadLink.innerHTML = 'Download Image';
+        }
+    </script>
+<footer>
+	<br><br><br><p><p style="text-align: center;">A tool by a tool: <a href="https://github.com/caskexe/">CASK.exe</a></p> </p>
+</footer>
+</body>
+</html>
